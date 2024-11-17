@@ -8,16 +8,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Rules\ReCaptcha;
 
 class AuthController extends Controller
 {
     // Register
     public function register(Request $request)
     {
+//        _dd($request);
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'g-recaptcha-response' => 'required'
         ]);
 
         $user = User::create([
