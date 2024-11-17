@@ -18,7 +18,12 @@ class DashboardController extends Controller
         $countContact = Contacts::count();
         $countActiveContact = Contacts::where('status','1')->count();
         $countActiveProjects = Projects::where('status','1')->count();
-        return response()->json(['activeProject'=>$countActiveProjects,'otherSkill'=>$countOtherSkill,'usingSkills' => $countUsingSkill,'activeContact'=>$countActiveContact,'learningSkills'=> $countLearningSkill,'contacts' => $countContact]);
+        return response()->json(['activeProject'=>$countActiveProjects,
+            'otherSkill'=>$countOtherSkill,'usingSkills' => $countUsingSkill,
+            'activeContact'=>$countActiveContact,
+            'learningSkills'=> $countLearningSkill,
+            'contacts' => $countContact,
+        ]);
     }
 
 }

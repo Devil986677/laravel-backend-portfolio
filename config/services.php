@@ -13,12 +13,18 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
-
+    'recaptcha' => [
+        'sitekey'   => env('RECAPTCHA_SITEKEY'),
+        'secret'    => env('RECAPTCHA_SECRET'),
+    ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
         'scheme' => 'https',
+    ],
+    'esewa' => [
+        'payment_url' => env('ESEWA_PAYMENT_URL'),
     ],
 
     'postmark' => [

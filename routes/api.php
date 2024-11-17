@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PlansController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SkillController;
@@ -30,15 +31,10 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 
 Route::post('/verify-token', [AuthController::class, 'verifyToken']);
 
-
-    Route::apiResource('contact', ContactController::class);
+Route::get('/count', [DashboardController::class, 'index']);
+Route::apiResource('contact', ContactController::class);
 Route::apiResource('skills', SkillController::class);
 Route::apiResource('projects', ProjectsController::class);
-Route::get('/count', [DashboardController::class, 'index']);
-
-
-Route::post('/esewa-payment-initiate', [EsewaPaymentController::class, 'initiatePayment']);
-Route::post('/esewa-payment-verify', [EsewaPaymentController::class, 'verifyPayment']);
-
-Route::get('/esewa-payment-success', [EsewaPaymentController::class, 'paymentSuccess']);
-Route::get('/esewa-payment-failure', [EsewaPaymentController::class, 'paymentFailure']);
+Route::apiResource('plans', PlansController::class);
+Route::post('/esewa/payment', [EsewaPaymentController::class, 'pay']);
+Route::get('/payment', [EsewaPaymentController::class, 'dataResponse']);
