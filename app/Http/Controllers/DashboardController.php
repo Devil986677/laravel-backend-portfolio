@@ -10,20 +10,27 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
 
-    public function index(){
+    public function index(Request $request)
+    {
+        $userId = $request->input('id');
 
-        $countUsingSkill = Skills::where('type','0')->count();
-        $countLearningSkill= Skills::where('type','1')->count();
-        $countOtherSkill= Skills::where('type','2')->count();
+
+        $countUsingSkill = Skills::where('type', '0')->where('created_by', $userId)->count();
+        $countLearningSkill = Skills::where('type', '1')->where('created_by', $userId)->count();
+        $countOtherSkill = Skills::where('type', '2')->where('created_by', $userId)->count();
         $countContact = Contacts::count();
-        $countActiveContact = Contacts::where('status','1')->count();
-        $countActiveProjects = Projects::where('status','1')->count();
-        return response()->json(['activeProject'=>$countActiveProjects,
-            'otherSkill'=>$countOtherSkill,'usingSkills' => $countUsingSkill,
-            'activeContact'=>$countActiveContact,
-            'learningSkills'=> $countLearningSkill,
+        $countActiveContact = Contacts::where('status', '1')->count();
+        $countActiveProjects = Projects::where('created_by', $userId)->where('status', '1')->count();
+
+        return response()->json([
+            'activeProject' => $countActiveProjects,
+            'otherSkill' => $countOtherSkill,
+            'usingSkills' => $countUsingSkill,
+            'activeContact' => $countActiveContact,
+            'learningSkills' => $countLearningSkill,
             'contacts' => $countContact,
         ]);
     }
+
 
 }

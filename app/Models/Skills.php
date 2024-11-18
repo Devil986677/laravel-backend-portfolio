@@ -13,5 +13,6 @@ class Skills extends Model
         'name',
         'image',
         'type',
+        'created_by'
     ];
 }

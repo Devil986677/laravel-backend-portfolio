@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Projects extends Model
+class Transactions extends Model
 {
     use HasFactory;
-    protected $table = 'projects';
+    protected $table = 'transaction_track';
     protected $fillable = [
-        'name',
-        'description',
+        'userId',
+        'transaction_uuid',
+        'productId',
+        'total_amount',
+        'extras',
         'status',
-        'image',
-        'created_by'
     ];
 }

@@ -14,7 +14,7 @@ class PlansController extends Controller
 
     public function index()
     {
-        $plans = Plans::all();
+        $plans = Plans::where('status', 1)->get();
         return PlanResource::collection($plans);
     }
 
